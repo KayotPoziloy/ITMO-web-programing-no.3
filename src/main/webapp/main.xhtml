@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: yakho
+  Date: 10.12.2023
+  Time: 16:44
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Title</title>
+    <link rel="stylesheet" href="styles/styles.css"/>
+</h:head>
+
+<h:body>
+    <table border="1" cellpadding="0" cellspacing="0" width="100%">
+
+        <thead>
+            <tr>
+                <th colspan="2" class="header">Яхонтов Максим Витальевич P3220</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+<!--                <td>-->
+<!--                    <canvas id="canvas_plot" width="500" height="500" onclick="checkPoint(event)"></canvas>-->
+<!--                    <script src="js/index.js"></script>-->
+<!--                </td>-->
+            </tr>
+            <tr class="header">
+                <td>
+                    <table border="1" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <!--ячейка ввода данных-->
+                            <td>
+                                <form action="javascript:void(0);" onsubmit="processForm();">
+
+                                    <div>
+                                        <label>Введите значение X:</label>
+                                    </div>
+
+                                    <div>
+                                        <label>Введите значение Y (от -5 до 3):</label>
+                                    </div>
+                                    <div>
+                                        <label>Введите значение R (от 2 до 5):</label>
+                                    </div>
+
+                                </form>
+                                <h:form>
+                                    <h:link outcome="toIndex" value="Начальная страница"/>
+                                </h:form>
+                            </td>
+                            <td>
+                                Отображение результатов
+                                <table border="1" cellpadding="0" cellspacing="0" width="80%" class="result-table" id="resultTable">
+                                    <tr>
+                                        <th>X</th>
+                                        <th>Y</th>
+                                        <th>R</th>
+                                        <th>Результат</th>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</h:body>
+
+</html>
