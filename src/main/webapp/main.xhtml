@@ -42,15 +42,24 @@
 
                                     <div>
                                         <label>Введите значение X:</label>
+                                        <h:selectOneMenu>
+                                            <f:selectItem itemValue="-2" itemLabel="-2"/>
+                                            <f:selectItem itemValue="-1.5" itemLabel="-1.5"/>
+                                            <f:selectItem itemValue="-1" itemLabel="-1"/>
+                                            <f:selectItem itemValue="-0.5" itemLabel="-0.5"/>
+                                            <f:selectItem itemValue="0" itemLabel="0"/>
+                                            <f:selectItem itemValue="0.5" itemLabel="0.5"/>
+                                            <f:selectItem itemValue="1" itemLabel="1"/>
+                                        </h:selectOneMenu>
                                     </div>
 
                                     <div>
                                         <label>Введите значение Y (от -5 до 3):</label>
+                                        <h:inputText required="true"/>
                                     </div>
-                                    <div>
-                                        <label>Введите значение R (от 2 до 5):</label>
-                                    </div>
-
+                                        <label>Введите значение R:</label>
+                                        <p:slider for="rValue"  minValue="1" maxValue="4" step="0.5" style="width: 130px; margin-left: auto; margin-right: auto; margin-top: 15px"/>
+                                        <h:inputHidden id="rValue" value=""/>
                                 </form>
                                 <h:form>
                                     <h:link outcome="toIndex" value="Начальная страница"/>
