@@ -7,40 +7,39 @@ function getFormValues() {
     let rValue = document.getElementById("rValue").value;
     rValue = rValue.replace(',', '.');
 
-    // console.log("X:", xValue);
-    // console.log("Y:", yValue);
-    // console.log("R:", rValues);
+    console.log("X:", xValue);
+    console.log("Y:", yValue);
+    console.log("R:", rValue);
 
     return {x: xValue, y: yValue, r: rValue};
 }
 
 // Функция для валидации значений X, Y и R
 function validateForm(xValue, yValue, rValue) {
-    // let errorX = document.getElementById("errorX");
-    // let errorY = document.getElementById("errorY");
-    // let errorR = document.getElementById("errorR");
-    // // console.log("r в validateForm", rValues);
-    //
-    // // Сбрасываем текст ошибок
-    // errorX.textContent = "";
-    // errorY.textContent = "";
-    // errorR.textContent = "";
+    let errorX = document.getElementById("errorX");
+    let errorY = document.getElementById("errorY");
+    let errorR = document.getElementById("errorR");
 
-    // if (isNaN(xValue) || xValue < -2 || xValue > 1.5) {
-    //     errorX.textContent = "Введите корректное значение X (от -2 до 1.5).";
-    //     return false;
-    // }
-    //
-    // if (isNaN(yValue) || yValue < -3 || yValue > 3) {
-    //     errorY.textContent = "Введите корректное значение Y (от -3 до 3).";
-    //     return false;
-    // }
-    //
-    //
-    // if (isNaN(rValue) || rValue < 1 || rValue > 4) {
-    //     errorR.textContent = "Введите корректное значение R (от 1 до 4).";
-    //     return false;
-    // }
+    // Сбрасываем текст ошибок
+    errorX.textContent = "";
+    errorY.textContent = "";
+    errorR.textContent = "";
+
+    if (isNaN(xValue) || xValue < -2 || xValue > 1.5 || xValue === "") {
+        errorX.textContent = "Введите корректное значение X (от -2 до 1.5).";
+        return false;
+    }
+
+    if (isNaN(yValue) || yValue < -3 || yValue > 3 || yValue === "") {
+        errorY.textContent = "Введите корректное значение Y (от -3 до 3).";
+        return false;
+    }
+
+
+    if (isNaN(rValue) || rValue < 1 || rValue > 4 || rValue === "") {
+        errorR.textContent = "Введите корректное значение R (от 1 до 4).";
+        return false;
+    }
 
     return true;
 }
