@@ -7,10 +7,10 @@ import java.util.Date;
 @ManagedBean
 @ViewScoped
 public class StartPageBean implements Serializable {
-
     private String currentDateTime;
 
     public String getCurrentDateTime() {
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
         currentDateTime = dateFormat.format(new Date());
         return currentDateTime;
