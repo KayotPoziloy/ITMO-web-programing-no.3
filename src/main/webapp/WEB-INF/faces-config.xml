@@ -9,6 +9,12 @@
         <managed-bean-class>StartPageBean</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>controllerBean</managed-bean-name>
+        <managed-bean-class>ControllerBean</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    
 
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>

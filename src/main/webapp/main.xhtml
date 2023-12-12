@@ -14,8 +14,8 @@
 <h:head>
     <title>Title</title>
     <link rel="stylesheet" href="styles/styles.css"/>
-    <script src="js/validate.js"></script>
 </h:head>
+
 <h:body>
 
     <table border="1" cellpadding="0" cellspacing="0" width="100%">
@@ -38,11 +38,11 @@
                         <tr>
                             <!--ячейка ввода данных-->
                             <td>
-                                <form action="javascript:void(0);" onsubmit="processForm()">
+                                <h:form>
 
                                     <div>
                                         <label>Введите значение X:</label>
-                                        <h:selectOneMenu id="xValue" value="">
+                                        <h:selectOneMenu value="#{controllerBean.x}">
                                             <f:selectItem itemValue="-2" itemLabel="-2"/>
                                             <f:selectItem itemValue="-1.5" itemLabel="-1.5"/>
                                             <f:selectItem itemValue="-1" itemLabel="-1"/>
@@ -51,19 +51,31 @@
                                             <f:selectItem itemValue="0.5" itemLabel="0.5"/>
                                             <f:selectItem itemValue="1" itemLabel="1"/>
                                         </h:selectOneMenu>
+
                                     </div>
-                                    <div id="errorX" class="error"></div>
+
                                     <div>
                                         <label>Введите значение Y (от -3 до 3):</label>
-                                        <h:inputText id="yValue" required="true" value=""/>
+                                        <h:inputText value="#{controllerBean.y}" required="true"/>
+
                                     </div>
-                                    <div id="errorY" class="error"></div>
-                                    <label>Введите значение R:</label>
-                                    <p:slider for="rValue"  minValue="1" maxValue="4" step="0.5" style="width: 130px; margin-left: auto; margin-right: auto; margin-top: 15px"/>
-                                    <h:inputHidden id="rValue" value=""/>
-                                    <div id="errorR" class="error"></div>
-                                    <input type="submit" value="Проверить"/>
-                                </form>
+                                    <div>
+                                        <label>Введите значение R:</label>
+                                        <p:slider for="rValue"  minValue="1" maxValue="4" step="0.5" style="width: 130px; margin-left: auto; margin-right: auto; margin-top: 15px"/>
+                                        <h:inputHidden id="rValue" value="#{controllerBean.r}"/>
+                                    </div>
+                                    <p:commandButton value="Проверить" action="#{controllerBean.validate()}" />
+
+
+
+                                </h:form>
+
+                                <h:form>
+                                    <h:outputText id="test" value="значения: " binding="#{controllerBean.component}"/>
+                                    <h:message for="test"/>
+                                    <h:commandButton value="click" action="#{controllerBean.doAction()}"/>
+                                </h:form>
+
                                 <h:form>
                                     <h:link outcome="toIndex" value="Начальная страница"/>
                                 </h:form>
