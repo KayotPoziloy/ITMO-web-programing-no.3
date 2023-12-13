@@ -11,6 +11,36 @@ public class ControllerBean implements Serializable {
     private Double y;
     private Double r;
 
+    private UIComponent xError;
+
+    private UIComponent yError;
+
+    private UIComponent rError;
+
+    public UIComponent getxError() {
+        return xError;
+    }
+
+    public void setxError(UIComponent xError) {
+        this.xError = xError;
+    }
+
+    public UIComponent getyError() {
+        return yError;
+    }
+
+    public void setyError(UIComponent yError) {
+        this.yError = yError;
+    }
+
+    public UIComponent getrError() {
+        return rError;
+    }
+
+    public void setrError(UIComponent rError) {
+        this.rError = rError;
+    }
+
     private UIComponent component;
 
     public UIComponent getComponent() {
@@ -27,21 +57,22 @@ public class ControllerBean implements Serializable {
         return "";
     }
 
-    public void validate() {
-
+    public String validate() {
+        FacesContext context = FacesContext.getCurrentInstance();
         if (checkX(x) && checkY(y) && checkR(r)) {
             // обработка дальше
         } else {
-//            if (!checkX(x)) {
-//                facesContext.addMessage("xValue", new FacesMessage("Некорректное значение X"));
-//            }
-//            if (!checkY(y)) {
-//                context.addMessage(component.getClientId(), new FacesMessage("Некорректное значение Y"));
-//            }
-//            if (!checkR(r)) {
-//                facesContext.addMessage("rValue", new FacesMessage("Некорректное значение R"));
-//            }
+            if (!checkX(x)) {
+                context.addMessage(xError.getClientId(), new FacesMessage("Некорректное значение X"));
+            }
+            if (!checkY(y)) {
+                context.addMessage(yError.getClientId(), new FacesMessage("Некорректное значение Y"));
+            }
+            if (!checkR(r)) {
+                context.addMessage(rError.getClientId(), new FacesMessage("Некорректное значение R"));
+            }
         }
+        return "";
     }
 
     public boolean checkX(Double x) {
