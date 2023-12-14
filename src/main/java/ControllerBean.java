@@ -8,8 +8,8 @@ import java.io.Serializable;
 @ApplicationScoped
 public class ControllerBean implements Serializable {
     private Double x;
-    private Double y;
-    private Double r;
+    private String y;
+    private String r = "1";
 
     private UIComponent xError;
 
@@ -59,8 +59,9 @@ public class ControllerBean implements Serializable {
 
     public String validate() {
         FacesContext context = FacesContext.getCurrentInstance();
+//        context.addMessage(component.getClientId(), new FacesMessage(" x: " + x + " y: " + y + " r: " + r));
         if (checkX(x) && checkY(y) && checkR(r)) {
-            // обработка дальше
+            context.addMessage(component.getClientId(), new FacesMessage("отправка"));
         } else {
             if (!checkX(x)) {
                 context.addMessage(xError.getClientId(), new FacesMessage("Некорректное значение X"));
@@ -82,16 +83,26 @@ public class ControllerBean implements Serializable {
             return false;
         }
     }
-    public boolean checkY(Double y) {
-        if (!y.isNaN() && y >= -3 && y <= 3) {
-            return true;
+    public boolean checkY(String y) {
+        if (y != null && !y.isEmpty()) {
+            try {
+                double doubleY = Double.parseDouble(y);
+                return doubleY >= -3 && doubleY <= 3;
+            } catch (NumberFormatException e) {
+                return false; // Обработка случая, когда y не является числом
+            }
         } else {
             return false;
         }
     }
-    public boolean checkR(Double r) {
-        if (!r.isNaN() && r >= 1 && r <= 4) {
-            return true;
+    public boolean checkR(String r) {
+        if (r != null && !r.isEmpty()) {
+            try {
+                double doubleR = Double.parseDouble(r);
+                return doubleR >= 1 && doubleR <= 4;
+            } catch (NumberFormatException NullPointerException) {
+                return false; // Обработка случая, когда y не является числом
+            }
         } else {
             return false;
         }
@@ -105,19 +116,19 @@ public class ControllerBean implements Serializable {
         this.x = x;
     }
 
-    public Double getY() {
+    public String getY() {
         return y;
     }
 
-    public void setY(Double y) {
+    public void setY(String y) {
         this.y = y;
     }
 
-    public Double getR() {
+    public String getR() {
         return r;
     }
 
-    public void setR(Double r) {
+    public void setR(String r) {
         this.r = r;
     }
 }
