@@ -17,51 +17,49 @@ public class ControllerBean implements Serializable {
 
     private UIComponent rError;
 
-    public UIComponent getxError() {
-        return xError;
-    }
-
-    public void setxError(UIComponent xError) {
-        this.xError = xError;
-    }
-
-    public UIComponent getyError() {
-        return yError;
-    }
-
-    public void setyError(UIComponent yError) {
-        this.yError = yError;
-    }
-
-    public UIComponent getrError() {
-        return rError;
-    }
-
-    public void setrError(UIComponent rError) {
-        this.rError = rError;
-    }
-
     private UIComponent component;
 
-    public UIComponent getComponent() {
-        return component;
-    }
-
-    public void setComponent(UIComponent component) {
-        this.component = component;
-    }
 
     public String doAction() {
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(component.getClientId(), new FacesMessage(" x: " + x + " y: " + y + " r: " + r));
+        context.addMessage(component.getClientId(), new FacesMessage(" x: " + x + " y: " + y + " r: " + r + " inside: " + checkArea(x, y, r)));
         return "";
     }
 
-    public String validate() {
+
+    public void dataWork() {
         FacesContext context = FacesContext.getCurrentInstance();
-//        context.addMessage(component.getClientId(), new FacesMessage(" x: " + x + " y: " + y + " r: " + r));
+        if (validate(x, y, r)) {
+            context.addMessage(component.getClientId(), new FacesMessage(" x: " + x + " y: " + y + " r: " + r + " inside: " + checkArea(x, y, r)));
+
+        }
+    }
+
+    public boolean checkArea(Double x, String yStr, String rStr) {
+        double y = Double.parseDouble(yStr);
+        double r = Double.parseDouble(rStr);
+
+        return checkCircle(x, y, r)
+                || checkRectangle(x, y, r)
+                || checkTriangle(x, y, r);
+    }
+
+    private boolean checkCircle(Double x, Double y, Double r) {
+        return x >= 0 && y <= 0 && x * x + y * y <= r * r;
+    }
+
+    private boolean checkRectangle(Double x, Double y, Double r) {
+        return x <= 0 && x >= -r && y >= -r/2 && y <= 0;
+    }
+
+    private boolean checkTriangle(Double x, Double y, Double r) {
+        return x <= 0 && y >= 0 && y <= 0.5*x + r;
+    }
+
+    public boolean validate(Double x, String y, String r) {
+        FacesContext context = FacesContext.getCurrentInstance();
         if (checkX(x) && checkY(y) && checkR(r)) {
-            context.addMessage(component.getClientId(), new FacesMessage("отправка"));
+            return true;
         } else {
             if (!checkX(x)) {
                 context.addMessage(xError.getClientId(), new FacesMessage("Некорректное значение X"));
@@ -72,8 +70,8 @@ public class ControllerBean implements Serializable {
             if (!checkR(r)) {
                 context.addMessage(rError.getClientId(), new FacesMessage("Некорректное значение R"));
             }
+            return false;
         }
-        return "";
     }
 
     public boolean checkX(Double x) {
@@ -83,6 +81,7 @@ public class ControllerBean implements Serializable {
             return false;
         }
     }
+
     public boolean checkY(String y) {
         if (y != null && !y.isEmpty()) {
             try {
@@ -95,6 +94,7 @@ public class ControllerBean implements Serializable {
             return false;
         }
     }
+
     public boolean checkR(String r) {
         if (r != null && !r.isEmpty()) {
             try {
@@ -130,5 +130,37 @@ public class ControllerBean implements Serializable {
 
     public void setR(String r) {
         this.r = r;
+    }
+
+    public UIComponent getxError() {
+        return xError;
+    }
+
+    public void setxError(UIComponent xError) {
+        this.xError = xError;
+    }
+
+    public UIComponent getyError() {
+        return yError;
+    }
+
+    public void setyError(UIComponent yError) {
+        this.yError = yError;
+    }
+
+    public UIComponent getrError() {
+        return rError;
+    }
+
+    public void setrError(UIComponent rError) {
+        this.rError = rError;
+    }
+
+    public UIComponent getComponent() {
+        return component;
+    }
+
+    public void setComponent(UIComponent component) {
+        this.component = component;
     }
 }

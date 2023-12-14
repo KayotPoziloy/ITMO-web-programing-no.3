@@ -71,7 +71,7 @@
                                         <h:message for="rError"/>
                                         <p:slider for="rValue" minValue="1" maxValue="4" step="0.5" style="width: 130px; margin-left: auto; margin-right: auto; margin-top: 15px"/>
                                     </div>
-                                    <h:commandButton value="Проверить" action="#{controllerBean.validate()}" />
+                                    <h:commandButton value="Проверить" action="#{controllerBean.dataWork()}" />
 
                                     <h:outputText id="test" value="значения: " binding="#{controllerBean.component}"/>
                                     <h:message for="test"/>
