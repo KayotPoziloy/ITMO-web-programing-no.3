@@ -1,3 +1,5 @@
+import org.apache.log4j.Logger;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.component.UIComponent;
@@ -7,6 +9,9 @@ import java.io.Serializable;
 
 @ApplicationScoped
 public class ControllerBean implements Serializable {
+
+    private static final Logger logger = Logger.getLogger(ControllerBean.class);
+
     private Double x;
     private String y;
     private String r = "1";
@@ -26,12 +31,13 @@ public class ControllerBean implements Serializable {
         return "";
     }
 
-
     public void dataWork() {
         FacesContext context = FacesContext.getCurrentInstance();
         if (validate(x, y, r)) {
-            context.addMessage(component.getClientId(), new FacesMessage(" x: " + x + " y: " + y + " r: " + r + " inside: " + checkArea(x, y, r)));
-
+            logger.info("Отправка в бд x: " + x + " y: " + y + " r: " + r);
+            // переброс на бд
+            boolean isInside = checkArea(x, y, r);
+//            resultManagerBean.addCheckResult(x, Double.parseDouble(y), Double.parseDouble(r), isInside);
         }
     }
 
@@ -59,6 +65,7 @@ public class ControllerBean implements Serializable {
     public boolean validate(Double x, String y, String r) {
         FacesContext context = FacesContext.getCurrentInstance();
         if (checkX(x) && checkY(y) && checkR(r)) {
+            logger.info("Данные верны");
             return true;
         } else {
             if (!checkX(x)) {
