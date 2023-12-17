@@ -5,6 +5,7 @@ import java.io.Serializable;
  * Сущность для бд
  */
 @Entity
+@Table(name="result")
 public class CheckResult implements Serializable {
 
     @Id
