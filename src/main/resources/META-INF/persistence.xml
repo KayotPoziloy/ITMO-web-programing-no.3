@@ -5,18 +5,19 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
      http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 
-    <persistence-unit name="result">
+    <persistence-unit name="result" transaction-type="JTA">
+        <jta-data-source>java:jboss/exampleDS</jta-data-source>
         <class>CheckResult</class>
 
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="postgres"/>
-            <property name="javax.persistence.jdbc.password" value="1"/>
+            <property name="hibernate.hbm2ddl" value="update"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="false"/>
 
-            <!-- Настройки EclipseLink -->
-            <property name="eclipselink.ddl-generation" value="update"/>
-            <property name="eclipselink.weaving" value="false"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="1"/>
         </properties>
     </persistence-unit>
 </persistence>

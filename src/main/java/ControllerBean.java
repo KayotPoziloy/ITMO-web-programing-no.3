@@ -31,13 +31,15 @@ public class ControllerBean implements Serializable {
         return "";
     }
 
+    ResultManager resultManager;
     public void dataWork() {
+        resultManager = new ResultManager();
         FacesContext context = FacesContext.getCurrentInstance();
         if (validate(x, y, r)) {
             logger.info("Отправка в бд x: " + x + " y: " + y + " r: " + r);
             // переброс на бд
             boolean isInside = checkArea(x, y, r);
-//            resultManagerBean.addCheckResult(x, Double.parseDouble(y), Double.parseDouble(r), isInside);
+            resultManager.addCheckResult(x, Double.parseDouble(y), Double.parseDouble(r), isInside);
         }
     }
 

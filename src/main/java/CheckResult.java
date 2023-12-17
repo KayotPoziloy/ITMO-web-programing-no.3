@@ -5,21 +5,23 @@ import java.io.Serializable;
  * Сущность для бд
  */
 @Entity
-@Table(name = "check_results")
 public class CheckResult implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "x")
+    @Column(nullable = false)
     private Double x;
-    @Column(name = "y")
+    @Column(nullable = false)
     private Double y;
-    @Column(name = "r")
+    @Column(nullable = false)
     private Double r;
-    @Column(name = "result")
+    @Column(nullable = false)
     private boolean isInside;
+
+    public CheckResult() {
+    }
 
     public Long getId() {
         return id;
