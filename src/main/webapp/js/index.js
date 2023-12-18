@@ -12,6 +12,30 @@ const yAxis = canvasPlotHeight / 2; // середина по вертикали
 
 const radius = 200;
 
+function checkPoint(event) {
+    // координата приходит относительно верхней левой точки в которой координата (0, 0)
+    // потому, чтобы сместить точку к реальной координате относительно центра канваса нужно вычитать длину/2 и ширину/2
+    const x = event.offsetX - xAxis;
+    const y = -(event.offsetY - yAxis);
+
+
+    const rSplit = 200; // один r это 200 px на полотне
+    // пусть x = 160px rSplit = 200px x = 160/200 = 0,8
+    // пусть x = 160/200*r = 0,8*r
+    let rValue = document.getElementById("values:rValue").value;
+    let xValue = x / rSplit * rValue; // получаем x относительно r в пикселях
+    let yValue = y / rSplit * rValue;
+
+    console.log("относительный x: " + xValue);
+    console.log("относительный y: " + yValue);
+    console.log("r: " + rValue);
+    // let errorR = document.getElementById("errorR");
+
+
+}
+
+
+
 // функция обновляет канвас
 function clearCanvas() {
     ctx.clearRect(0, 0, canvasPlotWidth, canvasPlotHeight);
