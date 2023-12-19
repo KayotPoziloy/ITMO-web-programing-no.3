@@ -42,7 +42,8 @@
 
                                     <div>
                                         <label>Введите значение X:</label>
-                                        <h:selectOneMenu value="#{controllerBean.x}">
+                                        <br/>
+                                        <h:selectOneMenu value="#{controllerBean.x}" style="margin-top: 15px">
                                             <f:selectItem itemValue="-2" itemLabel="-2"/>
                                             <f:selectItem itemValue="-1.5" itemLabel="-1.5"/>
                                             <f:selectItem itemValue="-1" itemLabel="-1"/>
@@ -58,7 +59,8 @@
 
                                     <div>
                                         <label>Введите значение Y (от -3 до 3):</label>
-                                        <h:inputText value="#{controllerBean.y}"/>
+                                        <br/>
+                                        <h:inputText value="#{controllerBean.y}" style="margin-top: 15px"/>
 
                                         <h:outputText id="yError" value="" binding="#{controllerBean.yError}"/>
                                         <h:message for="yError"/>
@@ -66,16 +68,13 @@
                                     <div>
                                         <label>Введите значение R: </label>
 
-                                        <p:inputText id="rValue" value="#{controllerBean.r}"/>
+                                        <h:inputHidden id="rValue" value="#{controllerBean.r}"/>
                                         <h:outputText id="rError" value="" binding="#{controllerBean.rError}"/>
                                         <h:message for="rError"/>
                                         <p:slider for="rValue" minValue="1" maxValue="4" step="0.5" style="width: 130px; margin-left: auto; margin-right: auto; margin-top: 15px"/>
+
                                     </div>
                                     <h:commandButton value="Проверить" action="#{controllerBean.dataWork()}" />
-
-                                    <h:outputText id="test" value="значения: " binding="#{controllerBean.component}"/>
-                                    <h:message for="test"/>
-                                    <h:commandButton value="click" action="#{controllerBean.doAction()}"/>
 
                                 </h:form>
 
@@ -110,7 +109,9 @@
                                         </h:column>
                                     </h:dataTable>
                                 </h:form>
-
+                                <h:form id="clearForm">
+                                    <h:commandButton value="Очистить" action="#{resultManager.clearDatabase}" />
+                                </h:form>
 
                             </td>
                         </tr>

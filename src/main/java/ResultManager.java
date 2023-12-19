@@ -33,6 +33,18 @@ public class ResultManager {
         }
     }
 
+    public void clearDatabase() {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.createQuery("DELETE FROM CheckResult").executeUpdate();
+            entityManager.getTransaction().commit();
+            logger.info("бд чиста");
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            logger.error("ошибка при очистке " + e);
+        }
+    }
+
     private List<CheckResult> results;
 
     public List<CheckResult> getResults() {
