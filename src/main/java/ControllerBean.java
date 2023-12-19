@@ -24,17 +24,9 @@ public class ControllerBean implements Serializable {
 
     private UIComponent component;
 
-
-    public String doAction() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(component.getClientId(), new FacesMessage(" x: " + x + " y: " + y + " r: " + r + " inside: " + checkArea(x, y, r)));
-        return "";
-    }
-
     ResultManager resultManager;
     public void dataWork() {
         resultManager = new ResultManager();
-        FacesContext context = FacesContext.getCurrentInstance();
         if (validate(x, y, r)) {
             logger.info("Отправка в бд x: " + x + " y: " + y + " r: " + r);
             // переброс на бд
@@ -61,7 +53,7 @@ public class ControllerBean implements Serializable {
     }
 
     private boolean checkTriangle(Double x, Double y, Double r) {
-        return x <= 0 && y >= 0 && y <= 0.5*x + r;
+        return x <= 0 && y >= 0 && y <= x/2 + r/2;
     }
 
     public boolean validate(Double x, String y, String r) {

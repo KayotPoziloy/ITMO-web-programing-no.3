@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="styles/styles.css"/>
 </h:head>
 
-<h:body>
+<h:body onload="dotSend()">
 
     <table border="1" cellpadding="0" cellspacing="0" width="100%">
 
@@ -29,7 +29,6 @@
             <tr>
                 <td>
                     <canvas id="canvas_plot" width="500" height="500" onclick="checkPoint(event)"/>
-                    <script src="js/index.js"/>
                 </td>
             </tr>
             <tr class="header">
@@ -68,10 +67,11 @@
                                     <div>
                                         <label>Введите значение R: </label>
 
-                                        <h:inputHidden id="rValue" value="#{controllerBean.r}"/>
+                                        <h:inputHidden id="rValue" value="#{controllerBean.r}" />
                                         <h:outputText id="rError" value="" binding="#{controllerBean.rError}"/>
                                         <h:message for="rError"/>
-                                        <p:slider for="rValue" minValue="1" maxValue="4" step="0.5" style="width: 130px; margin-left: auto; margin-right: auto; margin-top: 15px"/>
+                                        <p:slider onSlideEnd="dotSend()" for="rValue" minValue="1" maxValue="4" step="0.5"
+                                                  style="width: 130px; margin-left: auto; margin-right: auto; margin-top: 15px"/>
 
                                     </div>
                                     <h:commandButton value="Проверить" action="#{controllerBean.dataWork()}" />
@@ -84,8 +84,8 @@
                             </td>
                             <td>
                                 Отображение результатов
-                                <h:form >
-                                    <h:dataTable value="#{resultManager.allResults}" var="result"
+                                <h:form id="results">
+                                    <h:dataTable id="allResults" value="#{resultManager.allResults}" var="result"
                                     styleClass="employeeTable"
                                     headerClass="employeeTableHeader"
                                     rowClasses="employeeTableOddRow,employeeTableEvenRow"
@@ -93,19 +93,22 @@
 
                                         <h:column>
                                             <f:facet name="header">X</f:facet>
-                                            #{result.x}
+                                            <p id="x">#{result.x}</p>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Y</f:facet>
-                                            #{result.y}
+                                            <p id="y">#{result.y}</p>
+
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">R</f:facet>
-                                            #{result.r}
+                                            <p id="r">#{result.r} </p>
+
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Result</f:facet>
-                                            #{result.isInside ? 'Inside' : 'Outside'}
+                                            <p id="inside">#{result.isInside ? 'Inside' : 'Outside'}</p>
+
                                         </h:column>
                                     </h:dataTable>
                                 </h:form>
@@ -120,6 +123,7 @@
             </tr>
         </tbody>
     </table>
-</h:body>
+    <script src="js/index.js"/>
 
+</h:body>
 </html>

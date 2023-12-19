@@ -12,10 +12,74 @@ const yAxis = canvasPlotHeight / 2; // середина по вертикали
 
 const radius = 200;
 
+let resultsArray = [];
+
+// Функция записывает значения из таблицы на странице в массив
+function tableValues() {
+    resultsArray.length = 0;
+
+    let resultsTable = document.getElementById("results:allResults");
+    let rows = resultsTable.querySelectorAll('tbody tr');
+
+
+    rows.forEach(row => {
+        let [xValue, yValue, rValue, resultValue] = [...row.querySelectorAll('td p')].map(p => p.innerText.trim());
+
+        if (xValue !== undefined && yValue !== undefined && rValue !== undefined && resultValue !== undefined
+            && xValue !== "" && yValue !== "" && rValue !== "" && resultValue !== "") {
+            let resultObject = {
+                x: xValue,
+                y: yValue,
+                r: rValue,
+                result: resultValue
+            };
+
+            resultsArray.push(resultObject);
+        }
+
+    });
+    console.log(resultsArray);
+}
+
+function dotSend() {
+    tableValues();
+    clearCanvas();
+    resultsArray.forEach(function (result) {
+        dot(result);
+    })
+}
+
+function dot(result) {
+    const rSplit = 200; // один r это 200 px на полотне
+    let x = result.x;
+    let y = result.y;
+    let r = document.getElementById("values:rValue").value;
+
+    console.log("функция dot " + x, y, r);
+    let xValue = x / r * rSplit + xAxis - 2;
+    let yValue = - (y / r * rSplit - yAxis + 2);
+    // console.log("функция dot координаты в пикселях ", xValue, yValue);
+
+    let checkCircle = x >= 0 && y <= 0 && x * x + y * y <= r * r;
+    let checkTriangle = x <= 0 && x >= -r && y >= -r/2 && y <= 0;
+    let checkRectangle = x <= 0 && y >= 0 && y <= x/2 + r/2;
+
+    if (checkCircle || checkTriangle || checkRectangle) {
+        ctx.beginPath();
+        ctx.fillStyle = "blue"
+        ctx.fillRect(xValue, yValue, 4, 4,)
+        ctx.closePath();
+    } else {
+        ctx.beginPath();
+        ctx.fillStyle = "red"
+        ctx.fillRect(xValue, yValue, 4, 4,)
+        ctx.closePath();
+    }
+
+}
+
 function checkPoint(event) {
-
-
-
+    dotSend();
     const rSplit = 200; // один r это 200 px на полотне
     // пусть x = 160px rSplit = 200px x = 160/200 = 0,8
     // пусть x = 160/200*r = 0,8*r
@@ -38,10 +102,6 @@ function checkPoint(event) {
         console.log("относительный y: " + yValue);
         console.log("r: " + rValue);
     }
-
-
-
-
 }
 
 
