@@ -1,16 +1,18 @@
 import org.apache.log4j.Logger;
 
-import javax.inject.Named;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
 
-@Named
+@ApplicationScoped
 public class ResultManager {
     private static final Logger logger = Logger.getLogger(ResultManager.class);
 
     private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("result");
     private final EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 
     public void addCheckResult(Double x, Double y, Double r, boolean inside) {
         logger.info("addCheckResult");
@@ -29,6 +31,16 @@ public class ResultManager {
         } catch (Exception e) {
             logger.error("ошибка persist ", e);
         }
+    }
 
+    private List<CheckResult> results;
+
+    public List<CheckResult> getResults() {
+        return results;
+    }
+
+    public List<CheckResult> getAllResults() {
+        results = entityManager.createQuery("SELECT result FROM CheckResult result", CheckResult.class).getResultList();
+        return results;
     }
 }

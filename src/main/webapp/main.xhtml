@@ -85,14 +85,33 @@
                             </td>
                             <td>
                                 Отображение результатов
-                                <table border="1" cellpadding="0" cellspacing="0" width="80%" class="result-table" id="resultTable">
-                                    <tr>
-                                        <th>X</th>
-                                        <th>Y</th>
-                                        <th>R</th>
-                                        <th>Результат</th>
-                                    </tr>
-                                </table>
+                                <h:form >
+                                    <h:dataTable value="#{resultManager.allResults}" var="result"
+                                    styleClass="employeeTable"
+                                    headerClass="employeeTableHeader"
+                                    rowClasses="employeeTableOddRow,employeeTableEvenRow"
+                                    border="1" cellpadding="0" cellspacing="0" width="80%" class="result-table">
+
+                                        <h:column>
+                                            <f:facet name="header">X</f:facet>
+                                            #{result.x}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Y</f:facet>
+                                            #{result.y}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">R</f:facet>
+                                            #{result.r}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Result</f:facet>
+                                            #{result.isInside ? 'Inside' : 'Outside'}
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:form>
+
+
                             </td>
                         </tr>
                     </table>

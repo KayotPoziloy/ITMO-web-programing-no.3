@@ -14,7 +14,11 @@
         <managed-bean-class>ControllerBean</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
-    
+    <managed-bean>
+        <managed-bean-name>resultManager</managed-bean-name>
+        <managed-bean-class>ResultManager</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
 
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
