@@ -79,7 +79,9 @@
                                               style="width: 130px; margin-left: auto; margin-right: auto; margin-top: 15px"/>
 
                                 </div>
-                                <h:commandButton value="Проверить" action="#{controllerBean.dataWork(controllerBean.x, controllerBean.y)}" />
+                                <p:commandButton value="Проверить"
+                                                 action="#{controllerBean.dataWork(controllerBean.x, controllerBean.y)}"
+                                                 update="results, values"/>
 
                             </h:form>
 
@@ -118,7 +120,7 @@
                                 </h:dataTable>
                             </h:form>
                             <h:form id="clearForm">
-                                <h:commandButton value="Очистить" action="#{resultManager.clearDatabase}" />
+                                <p:commandButton value="Очистить" action="#{resultManager.clearDatabase}" update="results"/>
                             </h:form>
 
                         </td>

@@ -12,12 +12,15 @@ public class CheckResult implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @Column(nullable = false)
-    private Double x;
+    private String x;
+
     @Column(nullable = false)
-    private Double y;
+    private String y;
+
     @Column(nullable = false)
-    private Double r;
+    private String r;
     @Column(nullable = false)
     private boolean isInside;
 
@@ -32,27 +35,27 @@ public class CheckResult implements Serializable {
         this.id = id;
     }
 
-    public Double getX() {
+    public String getX() {
         return x;
     }
 
-    public void setX(Double x) {
+    public void setX(String x) {
         this.x = x;
     }
 
-    public Double getY() {
+    public String getY() {
         return y;
     }
 
-    public void setY(Double y) {
+    public void setY(String y) {
         this.y = y;
     }
 
-    public Double getR() {
+    public String getR() {
         return r;
     }
 
-    public void setR(Double r) {
+    public void setR(String r) {
         this.r = r;
     }
 

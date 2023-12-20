@@ -14,7 +14,7 @@ public class ResultManager {
     private final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 
-    public void addCheckResult(Double x, Double y, Double r, boolean inside) {
+    public void addCheckResult(String x, String y, String r, boolean inside) {
         logger.info("addCheckResult");
         CheckResult result = new CheckResult();
         logger.info("создался CheckResult()");

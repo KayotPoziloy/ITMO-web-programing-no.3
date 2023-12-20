@@ -12,7 +12,7 @@ public class ControllerBean implements Serializable {
 
     private static final Logger logger = Logger.getLogger(ControllerBean.class);
 
-    private Double x;
+    private String x;
     private String y;
     private String r = "1";
 
@@ -22,18 +22,16 @@ public class ControllerBean implements Serializable {
 
     private UIComponent rError;
 
-    private UIComponent component;
-
     ResultManager resultManager;
 
-    private Double receivedX = 1.0;
+    private String receivedX = "1";
     private String receivedY = "1";
 
-    public Double getReceivedX() {
+    public String getReceivedX() {
         return receivedX;
     }
 
-    public void setReceivedX(Double receivedX) {
+    public void setReceivedX(String receivedX) {
         this.receivedX = receivedX;
     }
 
@@ -50,17 +48,18 @@ public class ControllerBean implements Serializable {
         dataWork(receivedX, receivedY);
     }
 
-    public void dataWork(double x, String y) {
+    public void dataWork(String x, String y) {
         resultManager = new ResultManager();
         if (validate(x, y, r)) {
             logger.info("Отправка в бд x: " + x + " y: " + y + " r: " + r);
             // переброс на бд
             boolean isInside = checkArea(x, y, r);
-            resultManager.addCheckResult(x, Double.parseDouble(y), Double.parseDouble(r), isInside);
+            resultManager.addCheckResult(x, y, r, isInside);
         }
     }
 
-    public boolean checkArea(Double x, String yStr, String rStr) {
+    public boolean checkArea(String xStr, String yStr, String rStr) {
+        double x = Double.parseDouble(xStr);
         double y = Double.parseDouble(yStr);
         double r = Double.parseDouble(rStr);
 
@@ -81,7 +80,7 @@ public class ControllerBean implements Serializable {
         return x <= 0 && y >= 0 && y <= x/2 + r/2;
     }
 
-    public boolean validate(Double x, String y, String r) {
+    public boolean validate(String x, String y, String r) {
         FacesContext context = FacesContext.getCurrentInstance();
         if (checkX(x) && checkY(y) && checkR(r)) {
             logger.info("Данные верны");
@@ -100,9 +99,14 @@ public class ControllerBean implements Serializable {
         }
     }
 
-    public boolean checkX(Double x) {
-        if (!x.isNaN() && x >= -2 && x <= 1.5) {
-            return true;
+    public boolean checkX(String x) {
+        if (x != null && !x.isEmpty()) {
+            try {
+                double doubleX = Double.parseDouble(x);
+                return doubleX >= -2 && doubleX <= 1.5;
+            } catch (NumberFormatException e) {
+                return false; // Обработка случая, когда y не является числом
+            }
         } else {
             return false;
         }
@@ -134,11 +138,11 @@ public class ControllerBean implements Serializable {
         }
     }
 
-    public Double getX() {
+    public String getX() {
         return x;
     }
 
-    public void setX(Double x) {
+    public void setX(String x) {
         this.x = x;
     }
 
