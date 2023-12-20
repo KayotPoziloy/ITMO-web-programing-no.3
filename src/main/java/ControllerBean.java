@@ -25,7 +25,32 @@ public class ControllerBean implements Serializable {
     private UIComponent component;
 
     ResultManager resultManager;
-    public void dataWork() {
+
+    private Double receivedX = 1.0;
+    private String receivedY = "1";
+
+    public Double getReceivedX() {
+        return receivedX;
+    }
+
+    public void setReceivedX(Double receivedX) {
+        this.receivedX = receivedX;
+    }
+
+    public String getReceivedY() {
+        return receivedY;
+    }
+
+    public void setReceivedY(String receivedY) {
+        this.receivedY = receivedY;
+    }
+
+    public void receivedPointSend() {
+        logger.info("resX:" + receivedX + "resY:" + receivedY);
+        dataWork(receivedX, receivedY);
+    }
+
+    public void dataWork(double x, String y) {
         resultManager = new ResultManager();
         if (validate(x, y, r)) {
             logger.info("Отправка в бд x: " + x + " y: " + y + " r: " + r);
@@ -155,13 +180,5 @@ public class ControllerBean implements Serializable {
 
     public void setrError(UIComponent rError) {
         this.rError = rError;
-    }
-
-    public UIComponent getComponent() {
-        return component;
-    }
-
-    public void setComponent(UIComponent component) {
-        this.component = component;
     }
 }

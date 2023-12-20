@@ -36,19 +36,22 @@ function tableValues() {
 
             resultsArray.push(resultObject);
         }
-
     });
+
     console.log(resultsArray);
 }
 
+// Отрисовка значений из таблицы
 function dotSend() {
-    tableValues();
     clearCanvas();
+    tableValues();
+
     resultsArray.forEach(function (result) {
         dot(result);
     })
 }
 
+// отрисовка точки
 function dot(result) {
     const rSplit = 200; // один r это 200 px на полотне
     let x = result.x;
@@ -75,9 +78,9 @@ function dot(result) {
         ctx.fillRect(xValue, yValue, 4, 4,)
         ctx.closePath();
     }
-
 }
 
+// Функция, определяющая координату попадения точки
 function checkPoint(event) {
     dotSend();
     const rSplit = 200; // один r это 200 px на полотне
@@ -101,10 +104,33 @@ function checkPoint(event) {
         console.log("относительный x: " + xValue);
         console.log("относительный y: " + yValue);
         console.log("r: " + rValue);
+
+        clickDot(xValue, yValue);
     }
 }
 
+// Отрисовка точки по клику
+function clickDot(xValue, yValue) {
+    // Заносит данные на страницу для отправки на сервер
+    pageData(xValue, yValue);
+    // Вызывает сервер для отправки на бд и вывода на страницу
+    remote();
+    // Отрисовка значений из таблицы чз 100 миллисекунд,
+    // чтобы сервер успел отработать
+    setTimeout(function () {
+        dotSend();
+    }, 100)
 
+}
+
+// Заносит данные на страницу для отправки на сервер
+function pageData(xValue, yValue) {
+    let receivedX = document.getElementById("values:receivedX");
+    let receivedY = document.getElementById("values:receivedY");
+
+    receivedX.value = xValue.toString();
+    receivedY.value = yValue.toString();
+}
 
 // функция обновляет канвас
 function clearCanvas() {
