@@ -9,9 +9,8 @@ import java.io.Serializable;
 public class CheckResult implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // вот эти типы + типы id в бд
     private Long id;
-
 
     @Column(nullable = false)
     private String x;
